@@ -41,6 +41,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE6B079D1F4F2723009BE7BD /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DEC2BC101F4E4D5E005E3877 /* FrutasTableViewController.swift */,
+				DE6B079B1F4F16EF009BE7BD /* DetalhesFrutasViewController.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		DE6B079E1F4F2757009BE7BD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DE6B07991F4F0851009BE7BD /* FrutaCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		DE6B079F1F4F27A8009BE7BD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DEC2BC121F4E880A005E3877 /* Produto.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		DEC2BBF21F4E0927005E3877 = {
 			isa = PBXGroup;
 			children = (
@@ -61,10 +86,9 @@
 			isa = PBXGroup;
 			children = (
 				DEC2BBFE1F4E0928005E3877 /* AppDelegate.swift */,
-				DEC2BC101F4E4D5E005E3877 /* FrutasTableViewController.swift */,
-				DEC2BC121F4E880A005E3877 /* Produto.swift */,
-				DE6B07991F4F0851009BE7BD /* FrutaCell.swift */,
-				DE6B079B1F4F16EF009BE7BD /* DetalhesFrutasViewController.swift */,
+				DE6B079E1F4F2757009BE7BD /* View */,
+				DE6B079D1F4F2723009BE7BD /* ViewController */,
+				DE6B079F1F4F27A8009BE7BD /* Model */,
 				DEC2BC021F4E0928005E3877 /* Main.storyboard */,
 				DEC2BC051F4E0928005E3877 /* Assets.xcassets */,
 				DEC2BC071F4E0928005E3877 /* LaunchScreen.storyboard */,
