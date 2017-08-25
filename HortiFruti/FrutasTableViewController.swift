@@ -12,20 +12,22 @@ class FrutasTableViewController: UITableViewController, UISearchBarDelegate {
     
     //var frutas: [String] = ["maça", "mamão", "banana", "pera", "amora", "abacaxi", "jaboticaba", "abacate"]
     
-    var frutas: [Produto] = []{
-        didSet {
-            self.tableView.reloadData()
-        }
-    }
+    var frutas: [Produto] = []
+//    {
+//        didSet {
+//            self.tableView.reloadData()
+//        }
+//    }
 
     
     
     var searchBar = UISearchBar()
-    var frutaFiltrada: [Produto] = []{
-        didSet {
-            self.tableView.reloadData()
-        }
-    }
+    var frutaFiltrada: [Produto] = []
+//    {
+//        didSet {
+//            self.tableView.reloadData()
+//        }
+//    }
 
     var deveMostrarResultadosBuscados = false
 
@@ -132,37 +134,33 @@ class FrutasTableViewController: UITableViewController, UISearchBarDelegate {
 
     }
     
-//    fileprivate func enterpriseVisibleCount() -> Int {
-//        if let filtered = self.frutaFiltrada {
-//            return filtered.count
-//        }
-//        return self.frutas.count
-//    }
-//    
-//    fileprivate func enterprise(from indexPath: IndexPath) -> Produto? {
-//        if let filtered = self.frutaFiltrada, filtered.count > indexPath.row {
-//            return filtered[indexPath.row]
-//        }
-//        
-//        return self.frutas[indexPath.row]
-//    }
-//    
-//    fileprivate func search(term: String?) {
-//        guard let text = term, !text.isEmpty else {
-//            self.frutaFiltrada = nil // Faz reler a tableView e volta com a lista original
-//            return
-//        }
-//        self.frutaFiltrada = self.frutas.filter({
-//            $0.nome.lowercased().contains(text.lowercased())
-//        })
-//    }
+
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        frutaFiltrada = frutas.filter({
+        frutaFiltrada = frutas.filter({ (p: Produto) -> Bool in
             
-            $0.nome.lowercased().contains(searchText.lowercased())
+            return p.nome.lowercased().range(of: searchText.lowercased()) != nil
         })
+        
+//        frutaFiltrada = frutas.filter({
+//            
+//            $0.nome.lowercased().contains(searchText.lowercased())
+//        })
+        
+        if searchText != "" {
+            
+            deveMostrarResultadosBuscados = true
+            self.tableView.reloadData()
+        }
+        else{
+            
+            deveMostrarResultadosBuscados = false
+            self.tableView.reloadData()
+        
+        }
+            
+            
     }
 
 
@@ -175,6 +173,7 @@ class FrutasTableViewController: UITableViewController, UISearchBarDelegate {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         
         if deveMostrarResultadosBuscados{
             
@@ -193,12 +192,14 @@ class FrutasTableViewController: UITableViewController, UISearchBarDelegate {
         
         let identifier = "reuseIdentifier"
         let fruta = frutas[indexPath.row]
+
         
 
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? FrutaCell
         
         if deveMostrarResultadosBuscados{
             let frutaFilter = frutaFiltrada[indexPath.row]
+            
             cell?.frutaImageView.image =  frutaFilter.imagem
             cell?.tituloLabel.text = frutaFilter.nome
             cell?.origemLabel.text = frutaFilter.origem
@@ -210,14 +211,15 @@ class FrutasTableViewController: UITableViewController, UISearchBarDelegate {
             cell?.tituloLabel.text = fruta.nome
             cell?.origemLabel.text = fruta.origem
             
+            // arredondamento da imageView
+            cell?.frutaImageView.layer.cornerRadius = ((cell?.frutaImageView.frame.height)! / 2)
+            cell?.frutaImageView.clipsToBounds = true
+
             return cell!
             
             
         }
         
-        // arredondamento da imageView
-        cell?.frutaImageView.layer.cornerRadius = ((cell?.frutaImageView.frame.height)! / 2)
-        cell?.frutaImageView.clipsToBounds = true
         
        
     }
